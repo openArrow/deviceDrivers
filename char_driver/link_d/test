@@ -1,0 +1,14 @@
+#! /bin/bash
+insmod ./modules/lkm.ko 
+dmesg
+read v
+
+lsmod
+read v
+
+rmmod ./modules/lkm.ko
+dmesg
+read v
+
+lsmod
+read v

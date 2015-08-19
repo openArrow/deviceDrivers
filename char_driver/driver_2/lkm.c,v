@@ -1,0 +1,78 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	2013.11.13.17.26.23;	author root;	state Exp;
+branches;
+next	;
+
+
+desc
+@previous version
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#include "header.h"
+module_param(nod, int,  S_IRUGO);
+static int __init hello_init(void)
+{
+	int lv;
+	lv = nod;
+	res = alloc_chrdev_region(&dev, first_minor, nod, "chrdev");
+	if(res == -1)
+	printk(KERN_ERR "Registration Failed");
+        #ifdef DEBUG
+        printk(KERN_ALERT "Begins:%s\n", __func__);
+        #endif
+	printk(KERN_ALERT "Major no.:%d\n", MAJOR(dev));
+	printk(KERN_ALERT "Minor no.:%d\n", MINOR(dev));
+	sculldev = (struct ScullDev*)kmalloc(sizeof(struct ScullDev)*nod, GFP_KERNEL);
+	for(lv = 0; lv<=nod; lv++)
+	{
+		sculldev->i_cdev.owner = THIS_MODULE;
+		sculldev->i_cdev.ops = &ops;
+		sculldev->i_cdev.dev = dev;
+		sculldev->quantum = QUANTUM_SIZE;
+		sculldev->qset = QSET_SIZE;
+		sculldev->size = DATA_SIZE;
+		ldev = MKDEV(MAJOR(dev), lv);
+		printk(KERN_ALERT "Major no.:%d\n", MAJOR(ldev));
+	        printk(KERN_ALERT "Minor no.:%d\n", MINOR(ldev));
+		cdev_init(&(sculldev->i_cdev), &ops);
+		cdev_add(&(sculldev->i_cdev), dev, 1);
+		
+	}
+	#ifdef DEBUG
+        printk(KERN_ALERT "Ends:%s\n", __func__);
+        #endif
+	return 0;
+}
+
+static void __exit hello_exit(void)
+{
+	unregister_chrdev_region(dev, nod);
+	kfree(sculldev);
+	cdev_del(&(sculldev->i_cdev));
+        #ifdef DEBUG
+        printk(KERN_ALERT "Begins:%s\n", __func__);
+        #endif
+	#ifdef DEBUG
+        printk(KERN_ALERT "Ends:%s\n", __func__);
+        #endif
+
+}
+module_init(hello_init);
+module_exit(hello_exit);
+                                                                               
+                                                                              
+                               
+@

@@ -1,0 +1,1 @@
+cmd_/home/emblogic/Documents/serial_interrupt_handshake/lkm.ko := ld -r -m elf_i386 -T /usr/src/kernels/3.3.4-5.fc17.i686.PAE/scripts/module-common.lds --build-id  -o /home/emblogic/Documents/serial_interrupt_handshake/lkm.ko /home/emblogic/Documents/serial_interrupt_handshake/lkm.o /home/emblogic/Documents/serial_interrupt_handshake/lkm.mod.o

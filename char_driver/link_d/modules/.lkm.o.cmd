@@ -1,0 +1,1 @@
+cmd_/home/maveric/Desktop/emblogic_programs/driver/link_d/lkm.o := ld -m elf_x86_64   -r -o /home/maveric/Desktop/emblogic_programs/driver/link_d/lkm.o /home/maveric/Desktop/emblogic_programs/driver/link_d/init.o /home/maveric/Desktop/emblogic_programs/driver/link_d/exit.o 

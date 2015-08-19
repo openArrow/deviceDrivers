@@ -1,0 +1,53 @@
+#! /bin/bash
+echo "Running the make file"
+read v
+
+make
+read v
+
+echo "Inserting the driver into kernel"
+insmod ./modules/blk.ko
+read v
+
+echo "Driver inserted successfully"
+read v
+
+lsmod 
+read v
+
+echo "demsg"
+dmesg
+read v
+
+echo "listing the devices in kernel"
+read v
+
+vim /proc/devices
+read v
+
+echo "accessing the driver through application"
+read v
+
+gcc -o application application.c
+./application "Block_device"
+read v
+
+echo "device in partition table of kernel"
+read v
+vim /proc/partitions
+read v
+
+echo "removing the driver"
+rmmod ./modules/blk.ko
+read v
+
+dmesg
+read v
+
+lsmod
+read v
+
+make clean
+read v 
+
+ls

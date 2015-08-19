@@ -1,0 +1,23 @@
+#! /bin/bash
+make
+insmod ./modules/lkm.ko nod=5
+dmesg
+read v
+
+lsmod
+read v
+
+rm -rf nod
+mknod nod c 250 0 
+gcc app1.c -o app1 -lpthread
+./app1 nod
+read v
+dmesg
+
+read v
+rmmod ./modules/lkm.ko
+dmesg
+read v
+
+lsmod
+read v
